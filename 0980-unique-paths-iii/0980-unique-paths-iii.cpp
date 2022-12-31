@@ -6,17 +6,25 @@ public:
     for (int i = 0; i < grid.size(); ++i)
       for (int j = 0; j < grid[0].size(); ++j)
         if (grid[i][j] == 0) ++n;
-        else if (grid[i][j] == 1) { sx = j; sy = i; } // starting square    
+        else if (grid[i][j] == 1) { sx = i; sy = j; } // starting square    
     return dfs(grid, sx, sy, n);
   }
     
 private:
   int dfs(vector<vector<int>>& grid, int x, int y, int n) {
-    if (x < 0 || x == grid[0].size() || y < 0 || y == grid.size() || grid[y][x] == -1) return 0;
-    if (grid[y][x] == 2) return n == 0;//n=0 means all empty squares are visited=>one path found
-    grid[y][x] = -1;
+    if (x < 0 || x == grid.size() || y < 0 || y == grid[0].size() || grid[x][y] == -1) 
+        return 0;
+      
+    //n=0 means all empty squares are visited=>one path found
+    if (grid[x][y] == 2) 
+        return n == 0;
+      
+    grid[x][y] = -1;
+      
     int paths = dfs(grid, x + 1, y, n - 1) + dfs(grid, x - 1, y, n - 1) + dfs(grid, x, y + 1, n - 1) + dfs(grid, x, y - 1, n - 1);
-    grid[y][x] = 0;
+      
+    grid[x][y] = 0;
+      
     return paths;        
   }
 };
