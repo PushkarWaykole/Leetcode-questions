@@ -1,12 +1,6 @@
 class Solution {
 public:
-    bool wordPattern(string pattern, string s) {
-        
-        // if len(pattern) != len(words) or len(set(pattern)) != len(set(words)):
-        
-        
-        
-        
+    bool wordPattern(string pattern, string s) {     
         unordered_map<char,string> mpp;
         int n=pattern.size();
         vector<string> words;
